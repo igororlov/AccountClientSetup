@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	
+  <Product Id="a3ebe7c8-793d-4068-b2ea-625b2e882a71" 
+           Name="Account Client" 
+           Language="1033" 
+           Version="1.0.0.0" 
+           Manufacturer="Igor Orlov, UiO" 
+           UpgradeCode="f2513cad-92ab-41f3-a8a5-067523bb827b">
+    
+		<Package InstallerVersion="200" 
+             Compressed="yes" 
+             InstallScope="perMachine" 
+             Keywords="ODP,Installer,AccountClient,C#,Java"
+             Comments="C#/Java version of Account Client. Assignment 2 for INF5040-ODP."/>
+    
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+		<MediaTemplate />
+    
+    <!-- Tell WiX to install the files -->
+		<Feature Id="CSApplication" Title="C# Client" Level="1">
+			<ComponentGroupRef Id="CSharpComponents" />
+		</Feature>
+    
+    <Feature Id="JavaApplication" Title="Java Client" Level="1">
+      <ComponentGroupRef Id="JavaComponents" />
+    </Feature>
+    
+	</Product>
+
+  <!-- Define the directory structure -->
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir"> <!-- TARGETDIR - usually disk C:\-->
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Account Client" >
+          <Directory Id="CSINSTALLFOLDER" Name="CS Client" />
+          <Directory Id="JAVAINSTALLFOLDER" Name="Java Client"/>
+        </Directory>  
+			</Directory>
+		</Directory>
+	</Fragment>
+
+
+  <Fragment>
+    <!-- C# files for installer package -->
+		<ComponentGroup Id="CSharpComponents" Directory="CSINSTALLFOLDER">
+      <Component Id="CMP_AccountClientEXE" Guid="0cf90ca2-662a-46a0-8dbd-bf88cc3e41b6">
+        <File Id="FILE_AccountClientEXE"
+              Name="AccountClient.exe"
+              Source="C:\Main\Development\CSharp\AccountClient\AccountClient\bin\Debug\AccountClient.exe"
+              KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <Component Id="CMP_cspreadDLL" Guid="bb1f74f7-99bf-48cf-bedd-6818e0e742e4">
+        <File Id="FILE_cspreadDLL"
+              Name="cspread.dll"
+              Source="C:\Main\Development\CSharp\AccountClient\AccountClient\bin\Debug\cspread.dll"
+              KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP_propertiesINI" Guid="59f1dc48-2c57-474e-bd24-7b838b4a6c3e">
+        <File Id="FILE_propertiesINI"
+              Name="properties.ini"
+              Source="C:\Main\Development\CSharp\AccountClient\AccountClient\bin\Debug\properties.ini"
+              KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP_readmeTXT" Guid="08aa8d66-8c04-4572-9d8a-e509bc31316a">
+        <File Id="FILE_readmeTXT"
+              Name="readme.txt"
+              Source="C:\Main\Development\CSharp\AccountClient\AccountClient\bin\Debug\readme.txt"
+              KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP_batchTXT" Guid="958EE927-B1D4-4743-844C-6784345D4CB4">
+        <File Id="FILE_batchTXT"
+              Name="batch.txt"
+              Source="C:\Main\Development\CSharp\AccountClient\AccountClient\bin\Debug\batch.txt"
+              KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+    
+    <!-- Java files for installer package -->
+    <ComponentGroup Id="JavaComponents" Directory="JAVAINSTALLFOLDER">
+      <Component Id="CMP_AccountClientCLASS" Guid="6CC661E0-ADF2-4BB2-94A1-11439BEF0646">
+        <File Id="FILE_AccountClientCLASS"
+              Name="AccountClient.class"
+              Source="C:\Users\Igor\git\JavaSpread\JavaSpread\bin\no\uio\odp5040\AccountClient.class"
+              KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CMP_AccountMonitorCLASS" Guid="20B73E1C-EFC3-4987-BAC9-C00F137FD1B3">
+        <File Id="FILE_AccountMonitorCLASS"
+              Name="AccountMonitor.class"
+              Source="C:\Users\Igor\git\JavaSpread\JavaSpread\bin\no\uio\odp5040\AccountMonitor.class"
+              KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CMP_recThreadCLASS" Guid="8291F795-8FE7-4815-8E0E-95A225E779E1">
+        <File Id="FILE_recThreadCLASS"
+              Name="recThread.class"
+              Source="C:\Users\Igor\git\JavaSpread\JavaSpread\bin\no\uio\odp5040\recThread.class"
+              KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </ComponentGroup>
+    
+	</Fragment>
+</Wix>
