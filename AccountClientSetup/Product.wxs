@@ -29,10 +29,10 @@
       <ComponentGroupRef Id="JavaComponents" />
     </Feature>
 
-    <UIRef Id="WixUI_FeatureTree" />
+    <UIRef Id="WixUI_Advanced" />
 
     <!-- Check for .Net 4.5 installed. Break if not exists. 
-         "Installed" means only during installation, not uninstall or repair.-->
+         "Installed"  only during installation, not uninstall or repair.-->
     <PropertyRef Id="NETFRAMEWORK45"/>
     <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework 4.5, then run this installer again.">
       <![CDATA[Installed OR NETFRAMEWORK45]]>
@@ -40,6 +40,11 @@
     
   </Product>
 
+  <Fragment>
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+    <Property Id="ApplicationFolderName" Value="Account Client" />
+  </Fragment>
+  
   <!-- Define the directory structure -->
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir"> <!-- TARGETDIR - usually disk C:\-->
@@ -51,7 +56,6 @@
 			</Directory>
 		</Directory>
 	</Fragment>
-
 
   <Fragment>
     <!-- C# files for installer package -->
